@@ -3,7 +3,7 @@ services:
     name: boomer-website
     runtime: python
     buildCommand: pip install -r backend/requirements.txt
-    startCommand: backend && gunicorn app:app
+    startCommand: gunicorn backend/app:app
     envVars:
       - key: FLASK_APP
         value: app.py
