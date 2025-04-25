@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: boomer-website
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app
+    envVars:
+      - key: FLASK_APP
+        value: app.py
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: boomer-db
+          property: connectionString
+      - key: SECRET_KEY
+        value: 3e5fea859cc284996d2eaf69e33af3aaffb75bdca043f0bf124e18d9ae586434
+
+databases:
+  - name: boomer-db
+    databaseName: boomer
+    user: boomer
+    plan: free 
